@@ -1,19 +1,24 @@
-﻿using System;
+﻿using StopProcrastinating.Views.Pages;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace StopProcrastinating
 {
     public partial class App : Application
     {
+        #region constructor/destructor
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPageView();
         }
 
-        protected override void OnStart()
+        #endregion
+
+        #region methods
+
+        protected override void OnResume()
         {
         }
 
@@ -21,8 +26,10 @@ namespace StopProcrastinating
         {
         }
 
-        protected override void OnResume()
+        protected override void OnStart()
         {
         }
+
+        #endregion
     }
 }

@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace StopProcrastinating
+namespace StopProcrastinating.Views.Pages
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPageView : ContentPage
     {
-        public MainPage()
+        public MainPageView()
         {
             InitializeComponent();
         }
