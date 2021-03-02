@@ -1,10 +1,7 @@
-﻿using MvvmCross.ViewModels;
+﻿using MvvmCross.Commands;
+using MvvmCross.ViewModels;
 using StopProcrastinating.Interfaces.AppsManager;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace StopProcrastinating.ViewModels.Pages
 {
@@ -12,22 +9,36 @@ namespace StopProcrastinating.ViewModels.Pages
     {
         #region fields
 
-        private ObservableCollection<IApp> apps;
+        private MvxCommand getGrantPermissionCommand;
+
+        private MvxCommand getAppUsageStatsCommand;
 
         #endregion
 
-        #region constructor/destructor
+        #region methods
 
-        public MainPageViewModel()
+        private void GetAppUsageStats()
         {
-            Apps = new ObservableCollection<IApp>();
+            foreach (var process in AppContext.AppsManager.GetInstalledApps())
+            {
+                Apps.Add(process);
+            }
+        }
+
+        private void GetGrantPermission()
+        {
+            AppContext.Settings.LaunchSettings();
         }
 
         #endregion
 
         #region properties
 
-        public ObservableCollection<IApp> Apps { get => apps; set => SetProperty(ref apps, value); }
+        public MvxCommand GetGrantPermissionCommand => getGrantPermissionCommand ??= new MvxCommand(GetGrantPermission);
+
+        public MvxCommand GetAppUsageStatsCommand => getAppUsageStatsCommand ??= new MvxCommand(GetAppUsageStats);
+
+        public ObservableCollection<IApp> Apps { get; } = new ObservableCollection<IApp>();
 
         #endregion
     }

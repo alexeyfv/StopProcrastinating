@@ -10,7 +10,11 @@
     <ContentPage.BindingContext>
         <vm:MainPageViewModel />
     </ContentPage.BindingContext>
-    <Grid>
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Launch settings" Command="{Binding GetGrantPermissionCommand}" />
+            <Button Text="Get apps usage info" Command="{Binding GetAppUsageStatsCommand}"/>
+        </StackLayout>
         <CollectionView ItemsSource="{Binding Apps}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -18,5 +22,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
+    </StackLayout>
 </ContentPage>

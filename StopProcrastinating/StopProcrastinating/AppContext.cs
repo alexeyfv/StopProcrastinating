@@ -1,4 +1,5 @@
-﻿using StopProcrastinating.Interfaces.AppsManager;
+﻿using StopProcrastinating.Interfaces;
+using StopProcrastinating.Interfaces.AppsManager;
 using Xamarin.Forms;
 
 namespace StopProcrastinating
@@ -8,6 +9,8 @@ namespace StopProcrastinating
         #region static properties
 
         public static IAppsManager AppsManager => DependencyService.Get<IAppsManager>();
+
+        public static ISettings Settings => DependencyService.Get<ISettings>();
 
         #endregion
     }
