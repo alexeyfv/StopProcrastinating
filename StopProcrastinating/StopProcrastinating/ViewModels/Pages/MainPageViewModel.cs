@@ -1,13 +1,18 @@
-﻿using StopProcrastinating.Interfaces.AppsManager;
+﻿using MvvmCross.ViewModels;
+using StopProcrastinating.Interfaces.AppsManager;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace StopProcrastinating.ViewModels.Pages
 {
-    class MainPageViewModel : ViewModelBase
+    class MainPageViewModel : MvxViewModel
     {
         #region fields
 
-        private IEnumerable<IApp> apps;
+        private ObservableCollection<IApp> apps;
 
         #endregion
 
@@ -15,14 +20,14 @@ namespace StopProcrastinating.ViewModels.Pages
 
         public MainPageViewModel()
         {
-            Apps = AppContext.AppsManager.GetInstalledApps();
+            Apps = new ObservableCollection<IApp>();
         }
 
         #endregion
 
         #region properties
 
-        public IEnumerable<IApp> Apps { get => apps; set => Set(ref apps, value); }
+        public ObservableCollection<IApp> Apps { get => apps; set => SetProperty(ref apps, value); }
 
         #endregion
     }
