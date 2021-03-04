@@ -1,4 +1,4 @@
-﻿using StopProcrastinating.Interfaces.AppsManager;
+﻿using StopProcrastinating.Interfaces.App;
 using StopProcrastinating.iOS.Services.AppsManager;
 using System;
 using System.Collections.Generic;

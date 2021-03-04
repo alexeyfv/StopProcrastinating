@@ -1,5 +1,6 @@
-﻿using StopProcrastinating.Interfaces.AppsManager;
+﻿using StopProcrastinating.Interfaces.App;
 using StopProcrastinating.iOS.Services.AppsManager;
+using System;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(App))]
@@ -7,10 +8,8 @@ namespace StopProcrastinating.iOS.Services.AppsManager
 {
     public class App : IApp
     {
-        #region properties
-
-        public string Name { get; }
-
-        #endregion
+        public string Label { get; }
+        public DateTime LastTimeUsed { get; }
+        public byte[] IconBytes { get; }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using MvvmCross.Commands;
 using MvvmCross.ViewModels;
-using StopProcrastinating.Interfaces.AppsManager;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace StopProcrastinating.ViewModels.Pages
 {
@@ -12,6 +13,7 @@ namespace StopProcrastinating.ViewModels.Pages
         private MvxCommand getGrantPermissionCommand;
 
         private MvxCommand getAppUsageStatsCommand;
+        private bool isLoading;
 
         #endregion
 
@@ -19,9 +21,37 @@ namespace StopProcrastinating.ViewModels.Pages
 
         private void GetAppUsageStats()
         {
-            foreach (var process in AppContext.AppsManager.GetInstalledApps())
+            try
             {
-                Apps.Add(process);
+                Task.Run(() =>
+                {
+                    IsLoading = true;
+                    return AppContext.AppsManager.GetInstalledApps();
+                }).ContinueWith(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        throw task.Exception;
+                    }
+
+                    foreach (var process in task.Result)
+                    {
+                        Apps.Add(new Models.App.App(process));
+                    }
+                }).ContinueWith(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        throw task.Exception;
+                    }
+
+                    IsLoading = false;
+                });
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -38,7 +68,9 @@ namespace StopProcrastinating.ViewModels.Pages
 
         public MvxCommand GetAppUsageStatsCommand => getAppUsageStatsCommand ??= new MvxCommand(GetAppUsageStats);
 
-        public ObservableCollection<IApp> Apps { get; } = new ObservableCollection<IApp>();
+        public ObservableCollection<Models.App.App> Apps { get; } = new ObservableCollection<Models.App.App>();
+
+        public bool IsLoading { get => isLoading; set => SetProperty(ref isLoading, value); }
 
         #endregion
     }

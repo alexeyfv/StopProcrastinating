@@ -1,5 +1,5 @@
 ﻿using StopProcrastinating.Interfaces;
-using StopProcrastinating.Interfaces.AppsManager;
+using StopProcrastinating.Interfaces.App;
 using Xamarin.Forms;
 
 namespace StopProcrastinating

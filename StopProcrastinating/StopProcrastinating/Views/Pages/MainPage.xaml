@@ -15,10 +15,15 @@
             <Button Text="Launch settings" Command="{Binding GetGrantPermissionCommand}" />
             <Button Text="Get apps usage info" Command="{Binding GetAppUsageStatsCommand}"/>
         </StackLayout>
+        <Label Text="Loading..." FontSize="Medium" HorizontalTextAlignment="Center" IsVisible="{Binding IsLoading}"/>
         <CollectionView ItemsSource="{Binding Apps}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Label Text="{Binding Name}" />
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{Binding Icon}"  WidthRequest="64"  HeightRequest="64"/>
+                        <Label Text="{Binding Label}" />
+                        <Label Text="{Binding LastTimeUsed, StringFormat='{0:yyyy.MM.dd HH:mm:ss}'}" />
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
