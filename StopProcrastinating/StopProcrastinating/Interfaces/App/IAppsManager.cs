@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StopProcrastinating.Interfaces.AppsManager
+namespace StopProcrastinating.Interfaces.App
 {
     public interface IAppsManager
     {

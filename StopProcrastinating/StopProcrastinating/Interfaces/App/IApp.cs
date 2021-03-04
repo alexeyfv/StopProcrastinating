@@ -1,4 +1,6 @@
-﻿namespace StopProcrastinating.Interfaces.AppsManager
+﻿using System;
+
+namespace StopProcrastinating.Interfaces.App
 {
     public interface IApp
     {
